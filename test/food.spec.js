@@ -53,5 +53,14 @@ describe('Food API', () => {
         expect(response.body.calories).toBe(0)
       })
     })
+    test('Should return the food item with the updated values', () => {
+      return request(app)
+      .patch('/api/v1/foods/7')
+      .set({ "food": { "name": "Not Banana", "calories": "0"} })
+      .then(response => {
+        expect(response.staus).be(400)
+        expect(response.body.message).toBe('Food not found.')
+      })
+    })
   })
 })
