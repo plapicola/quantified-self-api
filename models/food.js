@@ -16,5 +16,20 @@ module.exports = (sequelize, DataTypes) => {
       })
     })
   }
+
+  Food.updateItem = function(req) {
+    return new Promise(function(resolve, reject) {
+      Food.update(
+        {name: req.body.name,
+        calories: req.body.calories},
+        {returning: true,
+        where: {id: req.params.id}}
+      )
+      .then(function([rowsUpdated, [updatedFood] ]) {
+        resolve(updatedFood)
+      })
+      .catch(error => reject({message: "Food not found."}))
+    })
+  }
   return Food;
 };

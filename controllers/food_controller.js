@@ -9,15 +9,26 @@ module.exports = class FoodController {
         response.status(200).send(FoodSerializer.formatAll(foods))
       })
   }
-  
+
   static show(req, res) {
     Food.findItem(req.params.id)
-      .then(food => {
-        res.setHeader('Content-Type', 'application/json');
-        res.status(200).send(food);
-      })
-      .catch(error => {
-        res.status(404).send(error)
-      })
+    .then(food => {
+      res.setHeader('Content-Type', 'application/json');
+      res.status(200).send(food);
+    })
+    .catch(error => {
+      res.status(404).send(error)
+    })
+  }
+
+  static update(req, res) {
+    Food.updateItem(req)
+    .then(food => {
+      res.setHeader('Content-Type', 'application/json');
+      res.status(200).send(food);
+    })
+    .catch(error => {
+      res.status(400).send(error)
+    })
   }
 }
