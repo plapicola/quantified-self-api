@@ -43,3 +43,22 @@ body:
 {
   "message": "Food not found."
 }
+
+##### Delete one Food item
+
+A single food object can be deleted by submitting a `DELETE` request to the `/api/v1/foods/:id` endpoint where `:id` is a valid Id of a food item in the system. This will return a 204 status code with no body. Example response would be:
+```HTTP
+status: 204
+body:
+{
+
+}
+```
+If the `:id` sent in the request does not exists in the system an unsuccessful response will be returned with a 404 status code and a message. An example response would look like:
+```HTTP
+status: 404
+body:
+{
+  "message": "Food not found."
+}
+```
