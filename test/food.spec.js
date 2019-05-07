@@ -40,4 +40,18 @@ describe('Food API', () => {
       })
     })
   })
+
+  describe('PATCH update food item path', () => {
+    test('Should return the food item with the updated values', () => {
+      return request(app)
+      .patch('/api/v1/foods/1')
+      .set({ "food": { "name": "Not Banana", "calories": "0"} })
+      .then(response => {
+        expect(response.staus).be(200)
+        expect(response.body.id).toBe(1)
+        expect(response.body.name).toBe('Not Banana')
+        expect(response.body.calories).toBe(0)
+      })
+    })
+  })
 })
