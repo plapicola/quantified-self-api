@@ -53,5 +53,12 @@ describe('Food API', () => {
         })
       })
     })
+    test('should return a 404 food not found for and invalid id in params', () => {
+      return request(app).delete('/api/v1/foods/7')
+      .then(response => {
+        expect(response.status).toBe(404)
+        expect(response.body.message).toBe('Food not found.')
+      })
+    })
   })
 })
