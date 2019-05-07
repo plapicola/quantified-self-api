@@ -56,7 +56,7 @@ describe('Food API', () => {
     test('Should return the food item with the updated values', () => {
       return request(app)
       .patch('/api/v1/foods/7')
-      .set({ "food": { "name": "Not Banana", "calories": "0"} })
+      .set({ name: "Not Banana", calories: 0})
       .then(response => {
         expect(response.status).toBe(400)
         expect(response.body.message).toBe('Food not found.')
