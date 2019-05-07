@@ -17,7 +17,7 @@ describe('Food API', () => {
           expect(response.status).toBe(200)
           expect(response.body.length).toBe(3)
           expect(response.body[0].name).toBe("Banana")
-          expect(response.body[0].calories).toBe(150)
+          expect(response.body[0].calories).toBe(105)
         })
     })
   })
