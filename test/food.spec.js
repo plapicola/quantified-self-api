@@ -10,7 +10,7 @@ describe('Food API', () => {
     shell.exec('npx sequelize db:seed:all');
   })
 
-  describe('Get games path', () => {
+  describe('Get foods path', () => {
     test('Should return all food items in the system', () => {
       return request(app).get('/api/v1/foods')
         .then(response => {
@@ -19,6 +19,25 @@ describe('Food API', () => {
           expect(response.body[0].name).toBe("Banana")
           expect(response.body[0].calories).toBe(105)
         })
+    })
+  })
+
+  describe('Get food path', () => {
+    test('Should return one food item by it Id in the system', () => {
+      return request(app).get('/api/v1/foods/1')
+      .then(response => {
+        expect(response.status).toBe(200)
+        expect(response.body.id).toBe(1)
+        expect(response.body.name).toBe('Banana')
+        expect(response.body.calories).toBe(105)
+      })
+    })
+    test('Should return a 404 Food not found for an invalid id in params', () => {
+      return request(app).get('/api/v1/foods/7')
+      .then(response => {
+        expect(response.status).toBe(404)
+        expect(response.body.message).toBe('Food not found.')
+      })
     })
   })
 })
