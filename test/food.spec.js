@@ -32,5 +32,12 @@ describe('Food API', () => {
         expect(response.body.calories).toBe(105)
       })
     })
+    test('Should return a 404 Food not found for an invalid id in params', () => {
+      return request(app).get('api/v1/foods/7')
+      .then(response => {
+        expect(response.status).toBe(404)
+        expect(response.message).toBe('Error: Food not found')
+      })
+    })
   })
 })
