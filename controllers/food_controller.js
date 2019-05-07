@@ -1,5 +1,5 @@
 var Food = require('../models').Food;
-var FoodSerializer = require('../serializers/food');
+var FoodSerializer = require('../serializers/food_serializer');
 
 module.exports = class FoodController {
   static index(request, response) {
