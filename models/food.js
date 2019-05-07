@@ -7,5 +7,14 @@ module.exports = (sequelize, DataTypes) => {
   Food.associate = function(models) {
     // associations can be defined here
   };
+
+  Food.findItem = function(id) {
+    return new Promise(function(resolve, reject) {
+      Food.findByPk(id)
+      .then(food => {
+        food ? resolve(food) : reject({message: "Food not found."})
+      })
+    })
+  }
   return Food;
 };

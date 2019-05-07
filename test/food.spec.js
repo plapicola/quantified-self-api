@@ -24,7 +24,7 @@ describe('Food API', () => {
 
   describe('Get food path', () => {
     test('Should return one food item by it Id in the system', () => {
-      return request(app).get('api/v1/foods/1')
+      return request(app).get('/api/v1/foods/1')
       .then(response => {
         expect(response.status).toBe(200)
         expect(response.body.id).toBe(1)
@@ -33,10 +33,10 @@ describe('Food API', () => {
       })
     })
     test('Should return a 404 Food not found for an invalid id in params', () => {
-      return request(app).get('api/v1/foods/7')
+      return request(app).get('/api/v1/foods/7')
       .then(response => {
         expect(response.status).toBe(404)
-        expect(response.message).toBe('Error: Food not found')
+        expect(response.body.message).toBe('Food not found.')
       })
     })
   })
