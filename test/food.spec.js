@@ -42,15 +42,11 @@ describe('Food API', () => {
     })
   })
 
-  describe('Delete food path', (), => {
+  describe('Delete food path', () => {
     test('Should delete the food record by id from the system', () => {
       return request(app).delete('/api/v1/foods/1')
       .then(response => {
         expect(response.status).toBe(204)
-        Food.findByPk(1)
-        .then(food => {
-          expect(food).toBe(undefined)
-        })
       })
     })
     test('should return a 404 food not found for and invalid id in params', () => {

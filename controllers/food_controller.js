@@ -9,7 +9,7 @@ module.exports = class FoodController {
         response.status(200).send(FoodSerializer.formatAll(foods))
       })
   }
-  
+
   static show(req, res) {
     Food.findItem(req.params.id)
       .then(food => {
@@ -19,5 +19,15 @@ module.exports = class FoodController {
       .catch(error => {
         res.status(404).send(error)
       })
+  }
+
+  static remove(req, res) {
+    Food.destroyItem(req.params.id)
+    .then(pass => {
+      res.status(204).send();
+    })
+    .catch(error => {
+      res.status(404).send({message: 'Food not found.'})
+    })
   }
 }

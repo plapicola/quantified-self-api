@@ -16,5 +16,19 @@ module.exports = (sequelize, DataTypes) => {
       })
     })
   }
+
+  Food.destroyItem = function(id) {
+    return new Promise(function(resolve, reject) {
+      Food.findByPk(id)
+      .then(food => {
+        food.destroy()
+        .then(response => { resolve() })
+        .catch(error => { reject() })
+      })
+      .catch(error => {
+        reject()
+      })
+    })
+  }
   return Food;
 };
