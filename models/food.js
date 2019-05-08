@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
     calories: DataTypes.INTEGER
   }, {});
   Food.associate = function(models) {
-    // associations can be defined here
+    Food.belongsToMany(models.Meal, {through: models.MealFood, as: 'food'})
   };
 
   Food.findItem = function(id) {
@@ -31,7 +31,7 @@ module.exports = (sequelize, DataTypes) => {
       })
     })
   }
-  
+
   Food.updateItem = function(req) {
     return new Promise(function(resolve, reject) {
       var food = req.body
