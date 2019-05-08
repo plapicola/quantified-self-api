@@ -79,6 +79,7 @@ body:
 
 {
   "error": "Name is required"
+}
 ```
 
 ##### Update one food item
@@ -90,8 +91,8 @@ POST '/api/v1/foods/1'
 
 body:
 {
-  name: 'newname',
-  calories: 0
+  "name": "newname",
+  "calories": 0
 }
 ```
 The response would look like:
