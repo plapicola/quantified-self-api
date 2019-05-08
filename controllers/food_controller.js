@@ -10,7 +10,7 @@ module.exports = class FoodController {
         response.status(200).send(FoodSerializer.formatAll(foods))
       })
   }
-
+  
   static create(request, response) {
     response.setHeader("Content-Type", "application/json");
     FoodCreateFacade.createFood(request.body.food)
@@ -31,5 +31,16 @@ module.exports = class FoodController {
       .catch(error => {
         res.status(404).send(error)
       })
+    }
+
+  static update(req, res) {
+    Food.updateItem(req)
+    .then(food => {
+      res.setHeader('Content-Type', 'application/json');
+      res.status(200).send(food);
+    })
+    .catch(error => {
+      res.status(400).send(error)
+    })
   }
 }
