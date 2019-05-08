@@ -1,6 +1,7 @@
 var Food = require('../models').Food;
 var FoodSerializer = require('../serializers/food_serializer');
 var FoodCreateFacade = require('../facades/food_create_facade');
+var pry = require('pryjs');
 
 module.exports = class FoodController {
   static index(request, response) {
@@ -18,7 +19,8 @@ module.exports = class FoodController {
       response.status(facade.status).send(facade.body)
     })
     .catch(facade => {
-      res.status(facade.status).send(facade.body)
+      eval(pry.it);
+      response.status(facade.status).send(facade.body)
     })
   }
 
@@ -29,7 +31,7 @@ module.exports = class FoodController {
         res.status(200).send(food);
       })
       .catch(error => {
-        res.status(404).send(error)
+        res.status(500).send(error)
       })
   }
 }
