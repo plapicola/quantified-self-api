@@ -6,6 +6,8 @@ var FoodController = require('../../../controllers/food_controller')
 router.get('/', FoodController.index);
 /* GET single food item */
 router.get('/:id', FoodController.show);
+/* PATCH update single food item */
+router.patch('/:id', FoodController.update)
 
 
 module.exports = router;
