@@ -48,6 +48,10 @@ describe('Food API', () => {
       .then(response => {
         expect(response.status).toBe(204)
       })
+      return request(app).get('/api/v1/foods/1')
+      .then(response => {
+        expect(response.status).toBe(404)
+      })
     })
     test('should return a 404 food not found for and invalid id in params', () => {
       return request(app).delete('/api/v1/foods/7')

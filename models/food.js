@@ -26,7 +26,7 @@ module.exports = (sequelize, DataTypes) => {
         .catch(error => { reject() })
       })
       .catch(error => {
-        reject()
+        reject({message: "Food not found."})
       })
     })
   }

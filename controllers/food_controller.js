@@ -21,13 +21,13 @@ module.exports = class FoodController {
       })
   }
 
-  static remove(req, res) {
+  static destroy(req, res) {
     Food.destroyItem(req.params.id)
     .then(pass => {
       res.status(204).send();
     })
     .catch(error => {
-      res.status(404).send({message: 'Food not found.'})
+      res.status(404).send(error)
     })
   }
 }

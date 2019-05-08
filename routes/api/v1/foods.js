@@ -7,7 +7,7 @@ router.get('/', FoodController.index);
 /* GET single food item */
 router.get('/:id', FoodController.show);
 /* DELETE single food item */
-router.delete('/:id', FoodController.remove);
+router.delete('/:id', FoodController.destroy);
 
 
 module.exports = router;
