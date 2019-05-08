@@ -87,6 +87,7 @@ describe('Food API', () => {
           expect(response.body.error).toBe("Invalid format")
         })
     })
+  })
 
   describe('PATCH update food item path', () => {
     test('Should return the food item with the updated values', () => {
