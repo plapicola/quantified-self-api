@@ -58,7 +58,7 @@ body:
   calories: 0
 }
 ```
-The response would like:
+The response would look like:
 
 ```HTTP
 status: 200
