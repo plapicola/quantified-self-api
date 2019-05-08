@@ -79,5 +79,13 @@ describe('Food API', () => {
         expect(response.body.error).toBe("Name is required")
       })
     })
+
+    test('Should return a 400 and send a message if not formatted', () => {
+      return request(app).post('/api/v1/foods').send({name: "Pear", calories: "20"})
+        .then(response => {
+          expect(response.status).toBe(400)
+          expect(response.body.error).toBe("Invalid format")
+        })
+    })
   })
 })
