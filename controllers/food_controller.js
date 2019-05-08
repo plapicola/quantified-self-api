@@ -1,5 +1,6 @@
 var Food = require('../models').Food;
 var FoodSerializer = require('../serializers/food_serializer');
+var FoodCreateFacade = require('../facades/food_create_facade');
 
 module.exports = class FoodController {
   static index(request, response) {
