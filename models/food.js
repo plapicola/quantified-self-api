@@ -1,4 +1,5 @@
 'use strict';
+var pry = require('pryjs')
 module.exports = (sequelize, DataTypes) => {
   const Food = sequelize.define('Food', {
     name: DataTypes.STRING,
@@ -19,16 +20,20 @@ module.exports = (sequelize, DataTypes) => {
 
   Food.updateItem = function(req) {
     return new Promise(function(resolve, reject) {
-      Food.update(
-        {name: req.body.name,
-        calories: req.body.calories},
-        {returning: true,
-        where: {id: req.params.id}}
-      )
-      .then(function([rowsUpdated, [updatedFood] ]) {
-        resolve(updatedFood)
-      })
-      .catch(error => reject({message: "Food not found."}))
+      var food = req.body
+      if (food.name != undefined && food.calories != undefined){
+        Food.update(
+          {name: food.name,
+          calories: food.calories},
+          {returning: true,
+          where: {id: req.params.id}}
+        )
+        .then(function([rowsUpdated, [updatedFood] ]) {
+          updatedFood ? resolve(updatedFood) : reject({message: "Food not found."})
+        })
+      }
+      else
+      reject({message: "Name and Calories required."})
     })
   }
   return Food;

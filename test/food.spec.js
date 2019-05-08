@@ -45,7 +45,7 @@ describe('Food API', () => {
     test('Should return the food item with the updated values', () => {
       return request(app)
       .patch('/api/v1/foods/1')
-      .send({ name: "Not Banana", calories: 0})
+      .send({name: "Not Banana", calories: 0})
       .then(response => {
         expect(response.status).toBe(200)
         expect(response.body.id).toBe(1)
@@ -53,13 +53,22 @@ describe('Food API', () => {
         expect(response.body.calories).toBe(0)
       })
     })
-    test('Should return the food item with the updated values', () => {
+    test('Should return 404 if Id for food is not in database', () => {
       return request(app)
       .patch('/api/v1/foods/7')
-      .set({ name: "Not Banana", calories: 0})
+      .send({name: "Not Banana", calories: 0})
       .then(response => {
         expect(response.status).toBe(400)
         expect(response.body.message).toBe('Food not found.')
+      })
+    })
+    test('Should return 404 if name and calories are not in body of update', () => {
+      return request(app)
+      .patch('/api/v1/foods/7')
+      .send({name: "Not Banana"})
+      .then(response => {
+        expect(response.status).toBe(400)
+        expect(response.body.message).toBe('Name and Calories required.')
       })
     })
   })
