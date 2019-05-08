@@ -18,6 +18,20 @@ module.exports = (sequelize, DataTypes) => {
     })
   }
 
+  Food.destroyItem = function(id) {
+    return new Promise(function(resolve, reject) {
+      Food.findByPk(id)
+      .then(food => {
+        food.destroy()
+        .then(response => { resolve() })
+        .catch(error => { reject() })
+      })
+      .catch(error => {
+        reject({message: "Food not found."})
+      })
+    })
+  }
+  
   Food.updateItem = function(req) {
     return new Promise(function(resolve, reject) {
       var food = req.body
@@ -32,8 +46,9 @@ module.exports = (sequelize, DataTypes) => {
           updatedFood ? resolve(updatedFood) : reject({message: "Food not found."})
         })
       }
-      else
-      reject({message: "Name and Calories required."})
+      else {
+         reject({message: "Name and Calories required."})
+      }
     })
   }
   return Food;

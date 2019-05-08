@@ -43,4 +43,14 @@ module.exports = class FoodController {
       res.status(400).send(error)
     })
   }
+
+  static destroy(req, res) {
+    Food.destroyItem(req.params.id)
+    .then(pass => {
+      res.status(204).send();
+    })
+    .catch(error => {
+      res.status(404).send(error)
+    })
+  }
 }

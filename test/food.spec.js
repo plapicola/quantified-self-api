@@ -1,6 +1,7 @@
 var shell = require('shelljs');
 var request = require('supertest');
 var app = require('../app');
+var Food = require('../models').Food;
 
 describe('Food API', () => {
   beforeEach(() => {
@@ -34,6 +35,26 @@ describe('Food API', () => {
     })
     test('Should return a 404 Food not found for an invalid id in params', () => {
       return request(app).get('/api/v1/foods/7')
+      .then(response => {
+        expect(response.status).toBe(404)
+        expect(response.body.message).toBe('Food not found.')
+      })
+    })
+  })
+
+  describe('Delete food path', () => {
+    test('Should delete the food record by id from the system', () => {
+      return request(app).delete('/api/v1/foods/1')
+      .then(response => {
+        expect(response.status).toBe(204)
+      })
+      return request(app).get('/api/v1/foods/1')
+      .then(response => {
+        expect(response.status).toBe(404)
+      })
+    })
+    test('should return a 404 food not found for and invalid id in params', () => {
+      return request(app).delete('/api/v1/foods/7')
       .then(response => {
         expect(response.status).toBe(404)
         expect(response.body.message).toBe('Food not found.')

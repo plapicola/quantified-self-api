@@ -45,6 +45,26 @@ body:
 }
 ```
 
+##### Delete one Food item
+
+A single food object can be deleted by submitting a `DELETE` request to the `/api/v1/foods/:id` endpoint where `:id` is a valid Id of a food item in the system. This will return a 204 status code with no body. Example response would be:
+```HTTP
+status: 204
+body:
+{
+
+}
+```
+If the `:id` sent in the request does not exists in the system an unsuccessful response will be returned with a 404 status code and a message. An example response would look like:
+```HTTP
+status: 404
+body: 
+
+{
+   "message": "Food not found"
+}
+```
+
 ##### Create a food item
 
 A new food item can be added to the system by submitting a `POST` request to the endpoint `/api/v1/foods`. The request should be formatted as follows:
@@ -109,11 +129,13 @@ body:
 If the request to the endpoint is sent with ID that is not in the system the response will be returned with a 400 status code, and an error message. An example unsuccessful response will look like:
 ```HTTP
 status: 400
+
 body:
 {
   "message": "Food not found."
 }
 ```
+
 If the request does not contain both name and calories in the body the response will be a 400 status code and return an error message. An example response would look like:
 ```HTTP
 status: 400
@@ -122,3 +144,5 @@ body:
   "message": "Name and Calories required."
 }
 ```
+
+
