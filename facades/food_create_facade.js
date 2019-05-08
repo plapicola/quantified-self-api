@@ -9,23 +9,27 @@ module.exports = class FoodCreateFacade {
 
   static createFood(foodParams) {
     return new Promise((resolve, reject) => {
-      if (foodParams) {
-        if (foodParams.name && foodParams.calories) {
-          Food.findOrCreate({where: foodParams})
-          .then(([food]) => {
-            resolve(new FoodCreateFacade(201, FoodSerializer.formatOne(food)))
-          })
-          .catch(error => {
-            reject(new FoodCreateFacade(400, error))
-          })
-        } else if (foodParams.calories) {
-          reject(new FoodCreateFacade(400, {error: "Name is required"}))
-        } else {
-          reject(new FoodCreateFacade(400, {error: "Calories are required"}))
-        }
+      if (foodParams && foodParams.name && foodParams.calories) {
+        Food.findOrCreate({where: foodParams})
+        .then(([food]) => {
+          resolve(new FoodCreateFacade(201, FoodSerializer.formatOne(food)))
+        })
+        .catch(error => {
+          reject(new FoodCreateFacade(400, error))
+        })
       } else {
-        reject(new FoodCreateFacade(400, {error: "Invalid format"}))
+        reject(new FoodCreateFacade(400, handleRejection(foodParams)))
       }
     })
+  }
+}
+
+function handleRejection(foodParams) {
+  if (foodParams === undefined) {
+    return {error: "Invalid format"}
+  } else if (foodParams.calories) {
+    return {error: "Name is required"}
+  } else {
+    return {error: "Calories are required"}
   }
 }
