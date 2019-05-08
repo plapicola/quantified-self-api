@@ -37,6 +37,11 @@ jobs: # a collection of steps
           prefix: coverage
       - store_test_results: # for display in Test Summary: https://circleci.com/docs/2.0/collect-test-data/
           path: test-results.xml
+  deploy:
+    docker:
+      - image: buildpack-deps:trusty
+    steps:
+      - checkout
       - run:
           name: Deploy Master to Heroku
           command: |

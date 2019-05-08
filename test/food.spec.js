@@ -41,6 +41,53 @@ describe('Food API', () => {
     })
   })
 
+  describe('Create foods path', () => {
+    test('Should allow the creation of food objects', () => {
+      return request(app).post('/api/v1/foods').send({
+        food: {
+          name: "Apple",
+          calories: 95
+        }
+      })
+      .then(response => {
+        expect(response.status).toBe(201)
+        expect(response.body.name).toBe("Apple")
+        expect(response.body.calories).toBe(95)
+      })
+    })
+
+    test('Should return a 400 and a message indicating calories are missing', () => {
+      return request(app).post('/api/v1/foods').send({
+        food: {
+          name: "Apple"
+        }
+      })
+      .then(response => {
+        expect(response.status).toBe(400)
+        expect(response.body.error).toBe("Calories are required")
+      })
+    })
+
+    test('Should return a 400 and a message indicating name is missing', () => {
+      return request(app).post('/api/v1/foods').send({
+        food: {
+          calories: 95
+        }
+      })
+      .then(response => {
+        expect(response.status).toBe(400)
+        expect(response.body.error).toBe("Name is required")
+      })
+    })
+
+    test('Should return a 400 and send a message if not formatted', () => {
+      return request(app).post('/api/v1/foods').send({name: "Pear", calories: "20"})
+        .then(response => {
+          expect(response.status).toBe(400)
+          expect(response.body.error).toBe("Invalid format")
+        })
+    })
+
   describe('PATCH update food item path', () => {
     test('Should return the food item with the updated values', () => {
       return request(app)
