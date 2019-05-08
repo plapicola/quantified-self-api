@@ -43,3 +43,40 @@ body:
 {
   "message": "Food not found."
 }
+
+##### Create a food item
+
+A new food item can be added to the system by submitting a `POST` request to the endpoint `/api/v1/foods`. The request should be formatted as follows:
+
+``` HTTP
+{
+  "food": {
+    "name": "Banana",
+    "calories": 105
+  }
+}
+```
+
+If the food item has been created, the response will be a 201 status, and include the food item that was created. An example response can be found below:
+
+``` HTTP
+code: 201
+body:
+
+{
+  "id": 1,
+  "name": "Banana",
+  "calories": 105
+}
+```
+
+In the event the food could not be created, the application will return a 400 status along with an error message indicating the reason the request failed. An example response can be found below:
+
+``` HTTP
+code: 400
+body:
+
+{
+  "error": "Name is required"
+}
+```
