@@ -60,8 +60,8 @@ describe('Food API', () => {
         expect(response.body.message).toBe('Food not found.')
       })
     })
-  }
-           
+  })
+
   describe('Create foods path', () => {
     test('Should allow the creation of food objects', () => {
       return request(app).post('/api/v1/foods').send({
