@@ -240,3 +240,45 @@ body:
     }
 ]
 ```
+
+##### Get single meals
+
+A list of all meal objects and their associated food objects can be retrived by submitting a `GET` request to the endpoint `/api/v1/meals/:meal_id/foods`, where `:meal_id` is the ID of a meal in the system. The application will return the meal object, including the `id` and `name`, as well as a nested array of food objects containing the `id`, `name`, and `calories` along with a 200 status code. A sample response can be found below:
+
+``` HTTP
+code: 200
+body:
+
+{
+    "id": 1,
+    "name": "Breakfast",
+    "foods": [
+        {
+            "id": 1,
+            "name": "Banana",
+            "calories": 150
+        },
+        {
+            "id": 6,
+            "name": "Yogurt",
+            "calories": 550
+        },
+        {
+            "id": 12,
+            "name": "Apple",
+            "calories": 220
+        }
+    ]
+}
+```
+
+In the event an invalid meal id is provided, the application will return a 404 status, along with an error message indicating the meal could not be found. A sample response can be found below:
+
+``` HTTP
+code: 404
+body:
+
+{
+   "error": "Meal not found"
+}
+```
