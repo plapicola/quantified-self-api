@@ -25,4 +25,15 @@ module.exports = class MealsController {
       response.status(404).send(error);
     })
   }
+
+  static create(request, response) {
+    response.setHeader("Content-Type", "application/json");
+    Meal.addFood(request.params)
+    .then(message => {
+      response.status(200).send(message)
+    })
+    .catch(error => {
+      response.status(404).send(error)
+    })
+  }
 }
