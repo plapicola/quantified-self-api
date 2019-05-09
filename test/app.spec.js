@@ -47,6 +47,37 @@ describe('API Spec', () => {
           })
       })
     })
+
+    describe('Add food to meal path', () => {
+      test('should add a food item to a meal', () => {
+        return request(app).post('/api/v1/meals/1/foods/3')
+        .then(response => {
+          expect(response.status).toBe(200)
+          expect(response.body.message).toBe('Successfully added Salmon to Breakfast')
+        })
+      })
+      test('should return a 404 if the meal id is not found', () => {
+        return request(app).post('/api/v1/meals/7/foods/3')
+        .then(response => {
+          expect(response.status).toBe(404)
+          expect(response.body.message).toBe('Meal not found.')
+        })
+      })
+      test('should return a 404 if the food id is not found', () => {
+        return request(app).post('/api/v1/meals/7/foods/3')
+        .then(response => {
+          expect(response.status).toBe(404)
+          expect(response.body.message).toBe('Food not found.')
+        })
+      })
+      test('should return a 404 if the meal id is not found', () => {
+        return request(app).post('/api/v1/meals/7/foods/3')
+        .then(response => {
+          expect(response.status).toBe(404)
+          expect(response.body.message).toBe('Meal and Food not found.')
+        })
+      })
+    })
   })
 
   describe('Food API', () => {
@@ -88,7 +119,7 @@ describe('API Spec', () => {
           expect(response.status).toBe(204)
         })
       })
-      
+
       test('should return a 404 food not found for and invalid id in params', () => {
         return request(app).delete('/api/v1/foods/7')
         .then(response => {
