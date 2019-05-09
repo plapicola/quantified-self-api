@@ -14,4 +14,15 @@ module.exports = class MealsController {
       response.status(500).send(error)
     })
   }
+
+  static show(request, response) {
+    response.setHeader("Content-Type", "application/json");
+    Meal.find(request.params.meal_id)
+    .then(meal => {
+      response.status(200).send(MealSerializer.formatOne(meal));
+    })
+    .catch(error => {
+      response.status(404).send(error);
+    })
+  }
 }
