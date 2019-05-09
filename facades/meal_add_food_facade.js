@@ -13,7 +13,7 @@ module.exports = class MealAddFoodFacade {
         .then(response => {resolve(response)})
         .catch(error => {reject(error)})
       })
-      .catch(() => {reject({status: 500, body: 'wtf'})})
+      .catch(() => {})
     })
   }
 }
@@ -27,7 +27,7 @@ function handleResponse(object) {
       })
       .then(mealFood => {
         if (mealFood) {
-          resolve({status: 200, body: {message: `Successfully added ${object.food.name} to ${object.meal.name}`}})
+          resolve({status: 201, body: {message: `Successfully added ${object.food.name} to ${object.meal.name}`}})
         } else {
           reject({status: 500, body: {error: 'Food was not added to Meal.'}})
         }

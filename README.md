@@ -282,3 +282,21 @@ body:
    "error": "Meal not found"
 }
 ```
+
+##### Post food to a meal
+A food object can be added to a meal object by making a post request to `/api/v1/meals/:meal_id/foods/:id` where `:meal_id` is the Id of an existing meal in the system, and `:id` is the Id of and existing food in the system. A succesful response will return a 201 status code with a message confirming the addition, an example succesful response will look like:
+```HTTP
+status: 201
+body:
+{
+  "message": "Successfully added Banana to Breakfast"
+}
+```
+A request where the `:meal_id` or the `:id` are incorrect will return a 404 status code and an error message explaining what information was incorrect. An example unsuccessful request response will look like:
+```HTTP
+status: 404
+body:
+{
+  "error": "Meal and Food were not found."
+}
+```
