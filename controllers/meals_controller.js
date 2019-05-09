@@ -11,7 +11,6 @@ module.exports = class MealsController {
       response.status(200).send(MealSerializer.formatAll(meals))
     })
     .catch(error => {
-      console.log(error);
       response.status(500).send(error)
     })
   }
