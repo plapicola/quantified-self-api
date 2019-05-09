@@ -30,8 +30,8 @@ module.exports = class MealsController {
   static create(request, response) {
     response.setHeader("Content-Type", "application/json");
     MealAddFoodFacade.addFood(request.params)
-    .then(message => {
-      response.status(200).send(message)
+    .then(response => {
+      response.status(response.status).send(response.message)
     })
     .catch(error => {
       response.status(404).send(error)
