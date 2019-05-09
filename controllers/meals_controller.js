@@ -1,5 +1,6 @@
 var Meal = require('../models').Meal;
 var MealSerializer = require('../serializers/meal_serializer');
+var MealAddFoodFacade = require('../facades/meal_add_food_facade');
 
 module.exports = class MealsController {
   static index(request, response) {
@@ -28,7 +29,7 @@ module.exports = class MealsController {
 
   static create(request, response) {
     response.setHeader("Content-Type", "application/json");
-    Meal.addFood(request.params)
+    MealAddFoodFacade.addFood(request.params)
     .then(message => {
       response.status(200).send(message)
     })

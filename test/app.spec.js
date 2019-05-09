@@ -26,7 +26,7 @@ describe('API Spec', () => {
       })
     })
 
-    describe('Get meal math', () => {
+    describe('Get meal path', () => {
       test('Should return a single meal', () => {
         return request(app).get("/api/v1/meals/1/foods")
         .then(response => {
@@ -60,21 +60,21 @@ describe('API Spec', () => {
         return request(app).post('/api/v1/meals/7/foods/3')
         .then(response => {
           expect(response.status).toBe(404)
-          expect(response.body.message).toBe('Meal not found.')
+          expect(response.body.error).toBe('Meal not found.')
         })
       })
       test('should return a 404 if the food id is not found', () => {
-        return request(app).post('/api/v1/meals/7/foods/3')
+        return request(app).post('/api/v1/meals/1/foods/7')
         .then(response => {
           expect(response.status).toBe(404)
-          expect(response.body.message).toBe('Food not found.')
+          expect(response.body.error).toBe('Food not found.')
         })
       })
       test('should return a 404 if the meal id is not found', () => {
-        return request(app).post('/api/v1/meals/7/foods/3')
+        return request(app).post('/api/v1/meals/7/foods/7')
         .then(response => {
           expect(response.status).toBe(404)
-          expect(response.body.message).toBe('Meal and Food not found.')
+          expect(response.body.error).toBe('Meal and Food not found.')
         })
       })
     })
