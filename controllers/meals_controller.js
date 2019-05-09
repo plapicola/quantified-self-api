@@ -17,12 +17,12 @@ module.exports = class MealsController {
 
   static show(request, response) {
     response.setHeader("Content-Type", "application/json");
-    Meal.findByPk(request.params.meal_id, {include: 'food'})
+    Meal.find(request.params.meal_id)
     .then(meal => {
       response.status(200).send(MealSerializer.formatOne(meal));
     })
     .catch(error => {
-      response.status(500).send(error);
+      response.status(404).send(error);
     })
   }
 }
