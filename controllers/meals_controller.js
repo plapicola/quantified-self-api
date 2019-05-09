@@ -25,4 +25,15 @@ module.exports = class MealsController {
       response.status(404).send(error);
     })
   }
+
+  static destroy(request, response) {
+    response.setHeader("Content-Type", "application/json");
+    MealFood.destroyItem(request.params.meal_id, request.params.id)
+    .then(mealFood => {
+      response.status(204).send()
+    })
+    .catch(error => {
+      response.status(404).send(error)
+    })
+  }
 }
