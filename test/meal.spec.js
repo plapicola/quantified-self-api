@@ -24,4 +24,16 @@ describe('Meals API', () => {
         })
     })
   })
+
+  describe('Get meal math', () => {
+    return request(app).get("/api/v1/meals/1/foods")
+      .then(response => {
+        expect(response.status).toBe(200)
+        expect(response.body.id).toBe(1)
+        expect(response.body.name).toBe("Breakfast")
+        expect(Array.isArray(response.body.foods))
+        expect(response.body.foods[0].name).toBe("Banana")
+        expect(response.body.foods[0].calories).toBe(105)
+      })
+  })
 })
