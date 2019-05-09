@@ -1,4 +1,5 @@
 var Meal = require('../models').Meal;
+var MealFood = require('../models').MealFood;
 var MealSerializer = require('../serializers/meal_serializer');
 
 module.exports = class MealsController {
