@@ -5,42 +5,48 @@ module.exports = {
     return Promise.all([
       queryInterface.bulkInsert('Food', [
         {
+          id: 1,
           name: 'Banana',
           calories: 105,
           createdAt: new Date(),
           updatedAt: new Date()
         },
         {
+          id: 2,
           name: 'Egg',
           calories: 75,
           createdAt: new Date(),
           updatedAt: new Date()
         },
         {
+          id: 3,
           name: 'Salmon',
           calories: 203,
           createdAt: new Date(),
           updatedAt: new Date()
         }
       ], {}),
-      queryInterface.bulkInsert('Meal', [
+      queryInterface.bulkInsert('Meals', [
         {
+          id: 1,
           name: 'Breakfast',
           createdAt: new Date(),
           updatedAt: new Date()
         },
         {
+          id: 2,
           name: 'Lunch',
           createdAt: new Date(),
           updatedAt: new Date()
         },
         {
+          id: 3,
           name: 'Dinner',
           createdAt: new Date(),
           updatedAt: new Date()
         }
       ], {}),
-      queryInterface.bulkInsert('MealFood', [
+      queryInterface.bulkInsert('MealFoods', [
         {
           FoodId: 1,
           MealId: 1,
@@ -84,8 +90,8 @@ module.exports = {
   down: (queryInterface, Sequelize) => {
     return Promise.all([
       queryInterface.bulkDelete('Food', null, {}),
-      queryInterface.bulkDelete('Meal', null, {}),
-      queryInterface.bulkDelete('MealFood', null, {})
+      queryInterface.bulkDelete('Meals', null, {}),
+      queryInterface.bulkDelete('MealFoods', null, {})
     ])
   }
 };
