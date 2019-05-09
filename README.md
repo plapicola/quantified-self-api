@@ -282,3 +282,24 @@ body:
    "error": "Meal not found"
 }
 ```
+
+##### Removing foods from meals
+
+The functionality to be able to delete a specific food item from a specific meal in the system can be accessed by submitting a `DELETE` request to the endpoint `api/v1/mealse/:meal_id/foods/:id` where `:meal_id` is the ID of a meal in the system and `:id` is the ID of a food in the system and the meal.
+
+A valid response will have a 204 status code and return no response body, as seen below:
+
+``` HTTP
+status: 204
+```
+
+In the event that an invalid meal or food id is provided, the application will return a 404 status and an error message indicating that a record could not be found due to either an invalid meal or food id provided in the request. An example response can be found below:
+
+``` HTTP
+code: 404
+body:
+
+{
+  "error" : "Meal or Food not found"
+}
+```
