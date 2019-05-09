@@ -1,11 +1,13 @@
-'use strict';
 var pry = require('pryjs')
+
+'use strict';
 module.exports = (sequelize, DataTypes) => {
   const Food = sequelize.define('Food', {
     name: DataTypes.STRING,
     calories: DataTypes.INTEGER
   }, {});
   Food.associate = function(models) {
+    Food.hasMany(models.MealFood, {onDelete: 'cascade', hooks: true});
     Food.belongsToMany(models.Meal, {through: models.MealFood, as: 'meals'})
   };
 
@@ -22,11 +24,11 @@ module.exports = (sequelize, DataTypes) => {
     return new Promise(function(resolve, reject) {
       Food.findByPk(id)
       .then(food => {
-        food.destroy()
-        .then(response => { resolve() })
-        .catch(error => { reject() })
+        return food.destroy()
       })
+      .then(response => { resolve() })
       .catch(error => {
+        console.log(error);
         reject({message: "Food not found."})
       })
     })

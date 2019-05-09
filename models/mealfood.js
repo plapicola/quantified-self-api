@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   MealFood.associate = function(models) {
     MealFood.belongsTo(models.Meal);
-    MealFood.belongsTo(models.Food);
+    MealFood.belongsTo(models.Food, {onDelete: 'cascade'});
   };
   return MealFood;
 };
