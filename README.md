@@ -58,7 +58,7 @@ body:
 If the `:id` sent in the request does not exists in the system an unsuccessful response will be returned with a 404 status code and a message. An example response would look like:
 ```HTTP
 status: 404
-body: 
+body:
 
 {
    "message": "Food not found"
@@ -145,4 +145,98 @@ body:
 }
 ```
 
+##### Get all meals
 
+A list of all meal objects and their associated food objects can be retrived by submitting a `GET` request to the endpoint `/api/v1/meals`. The application will return an array of meal objects, including the `id` and `name`, as well as a nested array of food objects containing the `id`, `name`, and `calories` along with a 200 status code. A sample response can be found below:
+
+``` HTTP
+code: 200
+body:
+
+[
+    {
+        "id": 1,
+        "name": "Breakfast",
+        "foods": [
+            {
+                "id": 1,
+                "name": "Banana",
+                "calories": 150
+            },
+            {
+                "id": 6,
+                "name": "Yogurt",
+                "calories": 550
+            },
+            {
+                "id": 12,
+                "name": "Apple",
+                "calories": 220
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "name": "Snack",
+        "foods": [
+            {
+                "id": 1,
+                "name": "Banana",
+                "calories": 150
+            },
+            {
+                "id": 9,
+                "name": "Gum",
+                "calories": 50
+            },
+            {
+                "id": 10,
+                "name": "Cheese",
+                "calories": 400
+            }
+        ]
+    },
+    {
+        "id": 3,
+        "name": "Lunch",
+        "foods": [
+            {
+                "id": 2,
+                "name": "Bagel Bites - Four Cheese",
+                "calories": 650
+            },
+            {
+                "id": 3,
+                "name": "Chicken Burrito",
+                "calories": 800
+            },
+            {
+                "id": 12,
+                "name": "Apple",
+                "calories": 220
+            }
+        ]
+    },
+    {
+        "id": 4,
+        "name": "Dinner",
+        "foods": [
+            {
+                "id": 1,
+                "name": "Banana",
+                "calories": 150
+            },
+            {
+                "id": 2,
+                "name": "Bagel Bites - Four Cheese",
+                "calories": 650
+            },
+            {
+                "id": 3,
+                "name": "Chicken Burrito",
+                "calories": 800
+            }
+        ]
+    }
+]
+```
