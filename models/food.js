@@ -22,11 +22,10 @@ module.exports = (sequelize, DataTypes) => {
     return new Promise(function(resolve, reject) {
       Food.findByPk(id)
       .then(food => {
-        return food.destroy()
+        food ? food.destroy() : reject({message: "Food not found."})
       })
       .then(response => { resolve() })
       .catch(error => {
-        console.log(error);
         reject({message: "Food not found."})
       })
     })
