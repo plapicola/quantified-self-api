@@ -20,42 +20,5 @@ module.exports = (sequelize, DataTypes) => {
         })
     })
   }
-
-  Meal.addFood = function(params) {
-    return new Promise(function(resolve, reject) {
-      Meal.findByPk(params.meal_id)
-      .then(meal => {
-        if (meal) {
-          Food.findByPk(params.id)
-          .then(food => {
-            if (food) {
-              MealFood.create({
-                MealId: meal.id,
-                FoodId: food.id
-              })
-              .then(mealfood => {
-                mealfood ? resolve({message: `Successfully added ${food.name} to ${meal.name}`}) : reject({error: "Food was not added to Meal."})
-              })
-              .catch(() => {
-                reject({error: "Food was not added to Meal."})
-              })
-            }
-            else {
-              reject({error: "Food not found."})
-            }
-          })
-          .catch(() => {
-            reject({error: "Food not found."})
-          })
-        }
-        else {
-          reject({error: "Meal not found."})
-        }
-      })
-      .catch(() => {
-        reject({error: "Meal not found."})
-      })
-    })
-  }
   return Meal;
 };
