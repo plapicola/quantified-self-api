@@ -52,7 +52,7 @@ describe('API Spec', () => {
       test('should add a food item to a meal', () => {
         return request(app).post('/api/v1/meals/1/foods/3')
         .then(response => {
-          expect(response.status).toBe(200)
+          expect(response.status).toBe(201)
           expect(response.body.message).toBe('Successfully added Salmon to Breakfast')
         })
       })
