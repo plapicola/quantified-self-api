@@ -26,7 +26,8 @@ describe('Meals API', () => {
   })
 
   describe('Get meal math', () => {
-    return request(app).get("/api/v1/meals/1/foods")
+    test('Should return a single meal', () => {
+      return request(app).get("/api/v1/meals/1/foods")
       .then(response => {
         expect(response.status).toBe(200)
         expect(response.body.id).toBe(1)
@@ -35,5 +36,14 @@ describe('Meals API', () => {
         expect(response.body.food[0].name).toBe("Banana")
         expect(response.body.food[0].calories).toBe(105)
       })
+    })
+
+    test('Should return a 404 if provided an invalid id', () => {
+      return request(app).get('/api/v1/meals/4/foods')
+        .then(response => {
+          expect(response.status).toBe(404)
+          expect(response.body.error).toBe("Meal not found");
+        })
+    })
   })
 })
