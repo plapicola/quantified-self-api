@@ -1,4 +1,5 @@
 var Meal = require('../models').Meal;
+var MealSerializer = require('../serializers/meal_serializer');
 
 module.exports = class MealsController {
   static index(request, response) {
@@ -7,7 +8,7 @@ module.exports = class MealsController {
       include: 'food'
     })
     .then(meals => {
-      response.status(200).send(meals)
+      response.status(200).send(MealSerializer.formatAll(meals))
     })
     .catch(error => {
       console.log(error);
