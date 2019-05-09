@@ -88,7 +88,7 @@ describe('API Spec', () => {
           expect(response.status).toBe(204)
         })
       })
-      
+
       test('should return a 404 food not found for and invalid id in params', () => {
         return request(app).delete('/api/v1/foods/7')
         .then(response => {
@@ -175,6 +175,23 @@ describe('API Spec', () => {
           expect(response.status).toBe(400)
           expect(response.body.message).toBe('Name and Calories required.')
         })
+      })
+    })
+
+    describe('Delete food from meal', () => {
+      test('Should return a 204 status if successful', () => {
+        return request(app).delete('/api/v1/meals/2/foods/2')
+        .then(response => {
+          expect(response.status).toBe(204)
+        })
+      })
+
+      test('should return a 404 and a message indicating error', () => {
+        return request(app).delete('/api/v1/meals/5/foods/5')
+          .then(response => {
+            expect(response.status).toBe(404)
+            expect(response.body.error).toBe("Meal or Food not found")
+          })
       })
     })
   })
