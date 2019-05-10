@@ -1,4 +1,6 @@
 'use strict';
+var Food = require('../models').Food;
+
 module.exports = (sequelize, DataTypes) => {
   const Meal = sequelize.define('Meal', {
     name: DataTypes.STRING

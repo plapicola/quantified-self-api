@@ -6,6 +6,8 @@ var MealsController = require('../../../controllers/meals_controller');
 router.get('/', MealsController.index);
 /* GET a single meal */
 router.get('/:meal_id/foods', MealsController.show);
+/* POST food item to a meal */
+router.post('/:meal_id/foods/:id', MealsController.create)
 /* DELETE a food from a meal */
 router.delete('/:meal_id/foods/:id', MealsController.destroy);
 
