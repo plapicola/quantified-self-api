@@ -8,5 +8,7 @@ router.get('/', MealsController.index);
 router.get('/:meal_id/foods', MealsController.show);
 /* POST food item to a meal */
 router.post('/:meal_id/foods/:id', MealsController.create)
+/* DELETE a food from a meal */
+router.delete('/:meal_id/foods/:id', MealsController.destroy);
 
 module.exports = router;
