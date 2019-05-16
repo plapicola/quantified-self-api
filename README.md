@@ -1,5 +1,27 @@
 # Quantified Self API
 
+### Introduction
+
+This application is intended to act as a basic backend for tracking meals and their associated calorie values, to be used in conjunction with a separate micro-service for fetching recipe information.
+
+### Dependencies
+
+The application requires the following dependencies prior to setup:
+
+- Node.js
+- Express.js
+- PostgreSQL
+
+### Initial Setup:
+
+``` bash
+npm install # Installs required dependencies
+npx sequelize db:create # Create PostgreSQL Database using default postgres user
+npx sequelize db:migrate # Run migrations for database
+```
+
+Once the dependencies have been installed and the database has been created, you may start the application using the command `npm start`.
+
 ### Using the application
 
 The application provides several endpoints for tracking food and meal information.
@@ -321,3 +343,35 @@ body:
   "error" : "Meal or Food not found"
 }
 ```
+
+### Testing
+
+To execute the test suite, run the command `npm test`. Testing is handled through the Jest library, and will watch the folder structure for changes. If a file is changed the suite will automatically re-run.
+
+
+### Known Issues
+
+- The application should contain additional seed data for more verbose usage
+
+### Contributing
+
+To contribute to this project, please fork and issue a pull request to the master branch with a note indicating changes made.
+
+### Core Contributors
+
+- @TyMazey (Author)
+- @plapicola (Author)
+
+### Database Schema
+
+![Database Schema](/schema.png)
+
+### Tech Stack
+
+This application was built using the following technologies:
+
+- Node.js
+- Express.js
+- Sequelize
+- PostgreSQL
+- Heroku
