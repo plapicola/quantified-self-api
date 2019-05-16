@@ -344,6 +344,10 @@ body:
 }
 ```
 
+### Testing
+
+To execute the test suite, run the command `npm test`. Testing is handled through the Jest library, and will watch the folder structure for changes. If a file is changed the suite will automatically re-run.
+
 
 ### Known Issues
 
